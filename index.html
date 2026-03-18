@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVITIC - Servicios Tecnológicos y Mantenimiento Informático</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">SERVITIC</div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#quienes-somos">Quiénes Somos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <h1>Soluciones Tecnológicas Profesionales</h1>
+            <p>Mantenimiento informático y servicios IT de confianza para tu empresa</p>
+        </section>
+
+        <section id="servicios">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <article class="service-card">
+                    <h3>🖥️ Mantenimiento Informático</h3>
+                    <p>Mantenimiento preventivo y correctivo de equipos informáticos. Garantizamos el óptimo funcionamiento de tu infraestructura tecnológica.</p>
+                </article>
+                <article class="service-card">
+                    <h3>🔧 Soporte Técnico</h3>
+                    <p>Asistencia técnica remota y presencial. Resolución rápida de incidencias y soporte continuado para tu empresa.</p>
+                </article>
+                <article class="service-card">
+                    <h3>☁️ Servicios Cloud</h3>
+                    <p>Migración y gestión de servicios en la nube. Optimiza tus recursos y accede a tu información desde cualquier lugar.</p>
+                </article>
+                <article class="service-card">
+                    <h3>🔒 Seguridad Informática</h3>
+                    <p>Protección de datos y sistemas. Implementamos las mejores prácticas de seguridad para proteger tu negocio.</p>
+                </article>
+                <article class="service-card">
+                    <h3>🌐 Redes y Conectividad</h3>
+                    <p>Diseño, instalación y mantenimiento de redes empresariales. Conectividad estable y segura para tu organización.</p>
+                </article>
+                <article class="service-card">
+                    <h3>📊 Consultoría IT</h3>
+                    <p>Asesoramiento tecnológico personalizado. Te ayudamos a tomar las mejores decisiones para tu infraestructura.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="quienes-somos">
+            <div class="about-content">
+                <h2>Quiénes Somos</h2>
+                <p>SERVITIC es una empresa especializada en servicios tecnológicos y mantenimiento informático con más de 10 años de experiencia en el sector.</p>
+                <p>Nuestro equipo de profesionales altamente cualificados se dedica a ofrecer soluciones tecnológicas personalizadas que se adaptan a las necesidades específicas de cada cliente.</p>
+                <p>Trabajamos con empresas de todos los tamaños, desde pequeños negocios hasta grandes corporaciones, proporcionando servicios de calidad, fiables y con un soporte excepcional.</p>
+                <p>Nuestra misión es garantizar que tu tecnología funcione perfectamente para que puedas concentrarte en lo que realmente importa: hacer crecer tu negocio.</p>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono">
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje *</label>
+                    <textarea id="mensaje" name="mensaje" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Mensaje</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📧 info@servitic.com</p>
+                    <p>📞 +34 900 123 456</p>
+                    <p>📍 Madrid, España</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#politica-privacidad">Política de Privacidad</a>
+                    <a href="#politica-cookies">Política de Cookies</a>
+                    <a href="#aviso-legal">Aviso Legal</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Horario</h3>
+                    <p>Lunes - Viernes: 9:00 - 18:00</p>
+                    <p>Sábados: 10:00 - 14:00</p>
+                    <p>Domingos: Cerrado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SERVITIC. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para los enlaces del menú
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Manejo básico del formulario
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
