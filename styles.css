@@ -1,0 +1,1857 @@
+/* 
+   ========================================
+   ARCHIVO: styles.css
+   DESCRIPCIÓN: Hoja de estilos para SERVITIC
+   AUTOR: Documentado para estudiantes
+   ========================================
+*/
+
+/* ===========================================
+   1. RESET Y ESTILOS GLOBALES
+   =========================================== */
+
+* {
+    /* 
+        SELECTOR UNIVERSAL (*): Aplica estos estilos a TODOS los elementos
+        USO: Resetear estilos por defecto del navegador
+        IMPORTANTE: Cada navegador tiene estilos diferentes por defecto
+    */
+    
+    margin: 0;
+    /* 
+        margin: Espacio EXTERIOR alrededor del elemento
+        0: Elimina todos los márgenes por defecto
+        RAZÓN: Navegadores añaden márgenes a h1, p, body, etc.
+        Sin esto: habría espacios no deseados en los bordes
+    */
+    
+    padding: 0;
+    /* 
+        padding: Espacio INTERIOR entre el contenido y el borde
+        0: Elimina todos los paddings por defecto
+        
+        DIFERENCIA margin vs padding:
+        margin: espacio FUERA del elemento (transparente)
+        padding: espacio DENTRO del elemento (tiene el color de fondo)
+        
+        Visualización:
+        ┌─────────────────────────┐
+        │   margin (exterior)     │
+        │  ┌───────────────────┐  │
+        │  │ border (borde)    │  │
+        │  │  ┌─────────────┐  │  │
+        │  │  │  padding    │  │  │
+        │  │  │  (interior) │  │  │
+        │  │  │  ┌───────┐  │  │  │
+        │  │  │  │CONTENT│  │  │  │
+        │  │  │  └───────┘  │  │  │
+        │  │  └─────────────┘  │  │
+        │  └───────────────────┘  │
+        └─────────────────────────┘
+    */
+    
+    box-sizing: border-box;
+    /* 
+        box-sizing: Controla cómo se calcula el tamaño total de un elemento
+        
+        OPCIONES:
+        - content-box (por defecto): width/height NO incluyen padding ni border
+          Si defines width: 300px y padding: 20px, el tamaño real será 340px
+        
+        - border-box (RECOMENDADO): width/height INCLUYEN padding y border
+          Si defines width: 300px y padding: 20px, el tamaño final será 300px
+        
+        BENEFICIO: Hace los cálculos más predecibles y fáciles
+        BUENA PRÁCTICA: Usar siempre border-box en el selector universal
+        
+        EJERCICIO: Comenta esta línea y observa cómo cambian los tamaños
+    */
+}
+
+body {
+    /* 
+        BODY: Estilos para todo el cuerpo del documento
+        Se heredan a todos los elementos hijos (herencia CSS)
+    */
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* 
+        font-family: Define la tipografía (fuente)
+        MÚLTIPLES FUENTES: Si la primera no está disponible, usa la siguiente
+        
+        Orden de preferencia:
+        1. 'Segoe UI' - Fuente moderna de Microsoft
+        2. Tahoma - Alternativa ampliamente disponible
+        3. Geneva - Para sistemas Mac
+        4. Verdana - Alternativa legible
+        5. sans-serif - Familia genérica (sin serifa)
+        
+        TIPOS DE FUENTES:
+        - serif: con "pies" (Times New Roman) - formal, tradicional
+        - sans-serif: sin "pies" (Arial) - moderna, limpia
+        - monospace: ancho fijo (Courier) - código
+        - cursive: script/manuscrita
+        - fantasy: decorativa
+        
+        FUENTES WEB: Para usar fuentes personalizadas:
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        
+        EJERCICIO: Cambia por 'Courier New', monospace y observa la diferencia
+    */
+    
+    line-height: 1.6;
+    /* 
+        line-height: Altura de línea (espacio entre líneas de texto)
+        1.6: 160% del tamaño de la fuente (sin unidad = relativo)
+        
+        VALORES:
+        - 1.6 (sin unidad): multiplicador del font-size (RECOMENDADO)
+        - 24px: tamaño fijo en píxeles
+        - 150%: porcentaje del font-size
+        
+        LEGIBILIDAD: 1.4 - 1.8 es ideal para lectura
+        Menos de 1.2: texto apretado, difícil de leer
+        Más de 2: texto muy espaciado
+        
+        EJERCICIO: Prueba con 1.0 y 3.0 para ver los extremos
+    */
+    
+    color: #333;
+    /* 
+        color: Color del texto
+        #333: Gris muy oscuro (casi negro) en hexadecimal
+        
+        FORMATOS DE COLOR:
+        1. Hexadecimal: #RRGGBB
+           #333333 = #333 (forma corta cuando los pares se repiten)
+           #000000 = negro puro
+           #ffffff = blanco puro
+           #ff0000 = rojo puro
+        
+        2. RGB: rgb(red, green, blue)
+           rgb(51, 51, 51) = #333
+           Valores de 0 a 255
+        
+        3. RGBA: rgb(red, green, blue, alpha)
+           rgba(51, 51, 51, 0.5) = gris semi-transparente
+           Alpha de 0 (transparente) a 1 (opaco)
+        
+        4. Nombres: red, blue, white, black, etc.
+           200+ nombres disponibles
+        
+        5. HSL: hsl(tono, saturación, luminosidad)
+           hsl(0, 0%, 20%) = gris oscuro
+        
+        POR QUÉ #333 EN VEZ DE #000:
+        - Negro puro (#000) es muy duro para los ojos
+        - #333 es más suave y profesional
+        - Mejor contraste sin ser agresivo
+        
+        EJERCICIO: Cambia a #000 (negro puro) y compara la legibilidad
+    */
+}
+
+/* ===========================================
+   2. HEADER (CABECERA)
+   =========================================== */
+
+header {
+    /* 
+        Selector de etiqueta: aplica a TODOS los <header>
+        ESPECIFICIDAD: Baja (prioridad baja)
+        BUENA PRÁCTICA: Usar clases (.header) si hay varios headers
+    */
+    
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* 
+        background: Define el fondo del elemento
+        
+        linear-gradient: Gradiente lineal (transición suave entre colores)
+        
+        SINTAXIS:
+        linear-gradient(dirección, color1 posición, color2 posición, ...)
+        
+        DESGLOSE:
+        - 135deg: Ángulo del gradiente (diagonal de arriba-izq a abajo-der)
+          0deg = vertical (arriba→abajo)
+          90deg = horizontal (izq→der)
+          45deg = diagonal
+          135deg = diagonal invertida
+        
+        - #667eea 0%: Primer color (morado claro) comienza al 0%
+        - #764ba2 100%: Segundo color (morado oscuro) termina al 100%
+        
+        ALTERNATIVAS:
+        - background-color: #667eea; (color sólido)
+        - background-image: url('fondo.jpg'); (imagen)
+        - background: radial-gradient(...); (gradiente circular)
+        
+        HERRAMIENTA: https://cssgradient.io/ para crear gradientes visualmente
+        
+        EJERCICIO: Cambia 135deg por 0deg, 90deg, 180deg
+        EJERCICIO 2: Añade un tercer color: #667eea 0%, #ff0000 50%, #764ba2 100%
+    */
+    
+    color: white;
+    /* Color del texto dentro del header */
+    
+    padding: 1rem 0;
+    /* 
+        padding: Espacio interior
+        1rem 0: SINTAXIS ABREVIADA
+        
+        SINTAXIS PADDING/MARGIN:
+        - 1 valor: padding: 20px; (todos los lados)
+        - 2 valores: padding: 20px 10px; (vertical horizontal)
+        - 3 valores: padding: 20px 10px 15px; (top horizontal bottom)
+        - 4 valores: padding: 20px 10px 15px 5px; (top right bottom left)
+          Recordatorio: "TRouBLe" (Top Right Bottom Left) ⌚
+        
+        UNIDADES:
+        - rem: Relativo al font-size del elemento raíz (<html>)
+          1rem = 16px por defecto
+          2rem = 32px
+          VENTAJA: Responsive, se escala con el zoom del navegador
+        
+        - em: Relativo al font-size del elemento padre
+          Puede complicarse en elementos anidados
+        
+        - px: Píxeles (fijo)
+          Menos flexible, no se escala bien
+        
+        - %: Porcentaje del elemento contenedor
+        
+        - vw/vh: % del viewport (ancho/alto de la ventana)
+          100vw = 100% del ancho de la ventana
+        
+        RECOMENDACIÓN: Usar rem para espaciados, px para bordes finos
+        
+        EJERCICIO: Cambia a padding: 2rem 1rem; y observa la diferencia
+    */
+    
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    /* 
+        box-shadow: Sombra debajo/alrededor del elemento
+        Crea profundidad y separación visual
+        
+        SINTAXIS:
+        box-shadow: offset-x offset-y blur spread color;
+        
+        DESGLOSE:
+        - 0: Desplazamiento horizontal (0 = centrado)
+        - 2px: Desplazamiento vertical (positivo = hacia abajo)
+        - 10px: Difuminado/blur (más alto = más difusa)
+        - rgba(0,0,0,0.1): Color negro con 10% de opacidad
+        
+        VALORES:
+        offset-x: -10px (izquierda) a 10px (derecha)
+        offset-y: -10px (arriba) a 10px (abajo)
+        blur: 0px (definida) a 50px+ (muy difusa)
+        spread (opcional): expande/contrae la sombra
+        
+        MÚLTIPLES SOMBRAS:
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 4px 20px rgba(0,0,0,0.2);
+        
+        SOMBRA INTERNA:
+        box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        
+        EJERCICIO: Prueba con: 5px 5px 15px rgba(255,0,0,0.5);
+        EJERCICIO 2: inset 0 0 20px rgba(0,0,0,0.3);
+    */
+    
+    position: sticky;
+    /* 
+        position: Controla el posicionamiento del elemento
+        
+        VALORES:
+        1. static (por defecto): Flujo normal del documento
+        
+        2. relative: Relativo a su posición original
+           Puede moverse con top, right, bottom, left
+           NO sale del flujo del documento
+        
+        3. absolute: Relativo al ancestro posicionado más cercano
+           SALE del flujo del documento
+           Otros elementos actúan como si no existiera
+        
+        4. fixed: Relativo a la ventana del navegador
+           Permanece fijo al hacer scroll
+           SALE del flujo del documento
+        
+        5. sticky: Híbrido entre relative y fixed
+           Se comporta como relative hasta que alcanza un umbral (top, bottom)
+           Luego se "pega" como fixed
+           NO sale del flujo del documento
+        
+        USO STICKY: Menús de navegación que se quedan arriba al scrollear
+        
+        EJERCICIO: Cambia a position: fixed; y observa la diferencia
+        (Pista: con fixed se queda pegado, pero puede haber problemas de layout)
+    */
+    
+    top: 0;
+    /* 
+        top: Junto con position, controla la posición vertical
+        0: Pegado al borde superior
+        FUNCIONA CON: relative, absolute, fixed, sticky
+        NO FUNCIONA CON: static
+    */
+    
+    z-index: 1000;
+    /* 
+        z-index: Controla el orden de apilamiento (profundidad)
+        Valores más altos = más cerca del usuario (por encima)
+        
+        VALORES:
+        - Números positivos: 1, 10, 100, 1000, 9999...
+        - Números negativos: -1 (detrás)
+        - auto (por defecto): orden del HTML
+        
+        CONTEXTO DE APILAMIENTO:
+        Solo funciona en elementos con position que NO sea static
+        
+        PRÁCTICA COMÚN:
+        - Content normal: 1-100
+        - Dropdowns/tooltips: 100-999
+        - Modals: 1000-9999
+        - Notificaciones: 10000+
+        
+        1000: Asegura que el header esté por encima del contenido
+        
+        EJERCICIO: Cambia a z-index: 1; y observa si queda detrás de algo al scrollear
+    */
+}
+
+.header-container {
+    /* 
+        SELECTOR DE CLASE (.clase): Aplica solo a elementos con class="header-container"
+        ESPECIFICIDAD: Media (más específico que etiquetas)
+        VENTAJA: Reutilizable en varios elementos
+    */
+    
+    max-width: 1200px;
+    /* 
+        max-width: Ancho máximo del elemento
+        1200px: No crecerá más de 1200px, incluso en pantallas grandes
+        
+        DIFERENCIAS:
+        - width: Tamaño fijo (no responsive)
+        - max-width: Tamaño máximo (puede ser menor en móviles)
+        - min-width: Tamaño mínimo
+        
+        PATRÓN COMÚN RESPONSIVE:
+        max-width: 1200px; (no más de 1200px en desktop)
+        width: 100%; (usa todo el ancho disponible en móviles)
+        
+        POR QUÉ 1200px:
+        - Legibilidad: líneas muy largas son difíciles de leer
+        - Estándar web: la mayoría de sitios usan 960-1400px
+        - Resolución común: 1920px de ancho, 1200px deja márgenes cómodos
+        
+        EJERCICIO: Cambia a 600px y observa cómo se estrecha el contenido
+    */
+    
+    margin: 0 auto;
+    /* 
+        margin: 0 auto; PATRÓN CLÁSICO para centrar horizontalmente
+        
+        DESGLOSE:
+        - 0: margin top y bottom (vertical)
+        - auto: margin left y right (horizontal)
+        
+        FUNCIONAMIENTO:
+        auto: El navegador calcula automáticamente márgenes iguales a izq y der
+        RESULTADO: El elemento se centra horizontalmente
+        
+        REQUISITO: El elemento debe tener un ancho definido (width o max-width)
+        
+        ALTERNATIVA MODERNA (Flexbox):
+        En el padre: display: flex; justify-content: center;
+        
+        EJERCICIO: Quita "auto" y pon 0: verás que el contenido se pega a la izquierda
+    */
+    
+    padding: 0 2rem;
+    /* 
+        padding: 0 2rem;
+        - 0: Sin padding arriba/abajo
+        - 2rem: 32px de padding izq/der (separación de los bordes laterales)
+        
+        PROPÓSITO: Evitar que el contenido toque los bordes en pantallas pequeñas
+    */
+    
+    display: flex;
+    /* 
+        display: Controla el modelo de layout del elemento
+        
+        VALORES PRINCIPALES:
+        
+        1. block (por defecto en div, p, h1): Ocupa todo el ancho disponible
+           Cada elemento en una nueva línea
+        
+        2. inline (por defecto en span, a): Solo ocupa el ancho de su contenido
+           Múltiples elementos en la misma línea
+           NO respeta width, height, margin vertical
+        
+        3. inline-block: Híbrido, en línea pero respeta width/height
+        
+        4. flex: Activa Flexbox Layout (contenedor flexible)
+           POTENTE: Alinea y distribuye elementos de forma flexible
+           Horizontal o vertical
+        
+        5. grid: Activa CSS Grid Layout
+           Sistema de cuadrícula bidimensional
+        
+        6. none: Oculta el elemento completamente
+           Como si no existiera en el HTML
+        
+        FLEXBOX: Sistema de layout unidimensional (fila o columna)
+        Al usar display: flex, este elemento se convierte en "flex container"
+        Sus hijos directos se convierten en "flex items"
+        
+        EJERCICIO: Comenta esta línea y observa cómo los elementos se apilan verticalmente
+    */
+    
+    align-items: center;
+    /* 
+        align-items: Alineación de items en el eje transversal (vertical si flex-direction es row)
+        SOLO FUNCIONA en flex containers
+        
+        VALORES:
+        - stretch (default): Los items se estiran para llenar el container
+        - flex-start: Alinea al inicio (arriba)
+        - flex-end: Alinea al final (abajo)
+        - center: Centra verticalmente ← NUESTRO CASO
+        - baseline: Alinea según la línea base del texto
+        
+        RESULTADO: Logo y menú centrados verticalmente en el header
+        
+        EJERCICIO: Cambia a flex-start o flex-end y observa
+    */
+    
+    justify-content: space-between;
+    /* 
+        justify-content: Distribución de items en el eje principal (horizontal si flex-direction es row)
+        SOLO FUNCIONA en flex containers
+        
+        VALORES:
+        - flex-start: Agrupa al inicio (izquierda)
+        - flex-end: Agrupa al final (derecha)
+        - center: Centra todos los items
+        - space-between: Espacio ENTRE items (primero y último pegados a bordes) ← NUESTRO CASO
+        - space-around: Espacio ALREDEDOR de cada item (incluye bordes)
+        - space-evenly: Espacio IGUAL entre todos los items y bordes
+        
+        space-between:
+        [Logo]                                    [Menú]
+        ↑                                              ↑
+        Pegado izq                            Pegado der
+        
+        space-around:
+        _[Logo]____________[Menú]_
+        
+        space-evenly:
+        __[Logo]___[Menú]__
+        
+        RESULTADO: Logo a la izquierda, menú a la derecha
+        
+        EJERCICIO: Cambia a center y observa cómo se agrupan en el centro
+    */
+}
+
+.logo {
+    width: 20%;
+    /* 
+        width: 20% del ancho del contenedor padre (header-container)
+        PORCENTAJE: Responsive, se ajusta automáticamente
+        
+        EJEMPLO:
+        Si header-container = 1200px → logo = 240px
+        Si header-container = 600px → logo = 120px
+        
+        ALTERNATIVA: width: 200px; (fijo, menos flexible)
+    */
+    
+    font-size: 1.8rem;
+    /* 
+        font-size: Tamaño de la fuente
+        1.8rem = 1.8 × 16px = 28.8px (aproximadamente)
+        
+        UNIDADES:
+        - rem: Relativo al tamaño base (16px) - RECOMENDADO
+        - em: Relativo al padre (se acumula en anidamiento)
+        - px: Píxeles fijos
+        - %: Porcentaje del padre
+        - vw: % del viewport width (1vw = 1% del ancho de ventana)
+        
+        JERARQUÍA TÍPICA:
+        h1: 2-3rem
+        h2: 1.5-2rem
+        h3: 1.2-1.5rem
+        body: 1rem (16px)
+        small: 0.8rem
+        
+        EJERCICIO: Cambia a 3rem y observa cómo crece el logo
+    */
+    
+    font-weight: bold;
+    /* 
+        font-weight: Grosor/peso de la fuente
+        
+        VALORES:
+        - Palabras clave: normal (400), bold (700), lighter, bolder
+        - Números: 100 (fina) a 900 (muy gruesa)
+          100: Thin
+          300: Light
+          400: Normal/Regular
+          500: Medium
+          600: Semi-bold
+          700: Bold ← EQUIVALENTE A bold
+          900: Black/Heavy
+        
+        NO TODAS LAS FUENTES tienen todos los pesos
+        Fuentes web (Google Fonts) permiten elegir pesos específicos
+        
+        EJERCICIO: Cambia a 900 o 100 y observa la diferencia
+    */
+    
+    letter-spacing: 2px;
+    /* 
+        letter-spacing: Espacio entre caracteres (kerning)
+        2px: Añade 2 píxeles de espacio extra entre cada letra
+        
+        VALORES:
+        - Positivos: expande (más espacio)
+        - Negativos: comprime (menos espacio)
+        - normal: espaciado por defecto
+        
+        USO COMÚN:
+        - Logos: espaciado mayor (1-3px) para aspecto premium
+        - Títulos en mayúsculas: 1-2px
+        - Texto de cuerpo: normal o 0.5px
+        
+        EFECTO: "S E R V I T I C" vs "SERVITIC"
+        
+        EJERCICIO: Prueba con -1px, 0px, 5px
+    */
+}
+
+nav {
+    width: 80%;
+    /* 
+        nav ocupa el 80% del ancho
+        Logo (20%) + Nav (80%) = 100% del header-container
+        Distribución asimétrica: más espacio para el menú
+    */
+}
+
+nav ul {
+    /* 
+        SELECTOR DESCENDIENTE: nav ul
+        Aplica a todos los <ul> que están DENTRO de <nav>
+        Más específico que solo "ul" (sobrescribe estilos generales)
+        
+        ESPECIFICIDAD: nav(etiqueta) ul(etiqueta) = 0,0,0,2
+    */
+    
+    list-style: none;
+    /* 
+        list-style: Controla los marcadores de lista (bullets)
+        
+        VALORES:
+        - none: Sin marcadores ← NUESTRO CASO (limpio para menús)
+        - disc: Círculos rellenos (● ● ●)
+        - circle: Círculos vacíos (○ ○ ○)
+        - square: Cuadrados (■ ■ ■)
+        - decimal: Números (1, 2, 3...)
+        - lower-alpha: Letras minúsculas (a, b, c...)
+        - upper-roman: Números romanos (I, II, III...)
+        
+        COMPONENTES:
+        - list-style-type: Tipo de marcador
+        - list-style-position: inside o outside
+        - list-style-image: url('icono.png')
+        
+        MENÚS DE NAVEGACIÓN: Siempre list-style: none;
+        
+        EJERCICIO: Comenta esta línea y verás los bullets aparecer
+    */
+    
+    display: flex;
+    /* 
+        Convierte la lista en un flex container
+        EFECTO: Los <li> se colocan en fila horizontal (por defecto)
+        SIN ESTO: Los <li> se apilarían verticalmente (comportamiento normal de listas)
+        
+        ALTERNATIVA ANTIGUA:
+        li { display: inline-block; } (menos flexible)
+    */
+    
+    justify-content: flex-end;
+    /* 
+        Alinea los items al final del container (derecha)
+        
+        RESULTADO: Todos los elementos del menú agrupados a la derecha
+        
+        ALTERNATIVA:
+        - flex-start: agrupados a la izquierda
+        - center: centrados
+        - space-between: distribuidos equitativamente
+        
+        EJERCICIO: Cambia a center y observa
+    */
+    
+    gap: 2rem;
+    /* 
+        gap: Espacio ENTRE los flex items (o grid items)
+        2rem = 32px de separación entre cada elemento del menú
+        
+        VENTAJA: No necesitas margins en cada <li>
+        Flexbox/Grid maneja el espaciado automáticamente
+        
+        ALTERNATIVA ANTIGUA:
+        li { margin-right: 2rem; }
+        li:last-child { margin-right: 0; } (quitar margin del último)
+        
+        gap es MÁS SIMPLE y LIMPIO
+        
+        TAMBIÉN FUNCIONA CON GRID:
+        column-gap: espacio horizontal
+        row-gap: espacio vertical
+        gap: valor; (ambos)
+        
+        EJERCICIO: Cambia a 0.5rem o 4rem y observa el espaciado
+    */
+}
+
+nav a {
+    color: white;
+    /* Enlaces blancos sobre fondo oscuro */
+    
+    text-decoration: none;
+    /* 
+        text-decoration: Controla decoraciones de texto (subrayados, tachados)
+        
+        VALORES:
+        - none: Sin decoración ← COMÚN EN MENÚS
+        - underline: Subrayado
+        - overline: Línea superior
+        - line-through: Tachado
+        
+        COMPONENTES AVANZADOS:
+        text-decoration: underline wavy red;
+        - Estilo: solid, double, dashed, dotted, wavy
+        - Color: cualquier color
+        - Grosor: thin, thick, 2px
+        
+        ENLACES: Por defecto tienen underline
+        MENÚS MODERNOS: text-decoration: none;
+        
+        BUENA PRÁCTICA: Añadir hover effect para indicar interactividad
+        
+        EJERCICIO: Comenta esta línea y verás los subrayados predeterminados
+    */
+    
+    font-weight: 500;
+    /* 
+        500: Medium weight (entre normal y bold)
+        Peso equilibrado para menús de navegación
+    */
+    
+    transition: opacity 0.3s;
+    /* 
+        transition: Animación suave entre estados
+        MAGIA: Hace que los cambios NO sean instantáneos
+        
+        SINTAXIS:
+        transition: propiedad duración timing-function delay;
+        
+        DESGLOSE:
+        - opacity: Propiedad que se anima (aquí: la opacidad al hacer hover)
+        - 0.3s: Duración (0.3 segundos)
+        - timing-function (omitido): ease (por defecto)
+        - delay (omitido): 0s (sin retraso)
+        
+        TIMING FUNCTIONS:
+        - ease: Lento-rápido-lento (natural)
+        - linear: Velocidad constante
+        - ease-in: Empieza lento
+        - ease-out: Termina lento
+        - ease-in-out: Similar a ease
+        - cubic-bezier(n,n,n,n): Personalizado
+        
+        MÚLTIPLES PROPIEDADES:
+        transition: opacity 0.3s, transform 0.5s;
+        transition: all 0.3s; (todas las propiedades)
+        
+        USO: Mejora la experiencia de usuario (UX)
+        Sin transición: cambio brusco (desagradable)
+        Con transición: cambio suave (agradable)
+        
+        SE ACTIVA CON: hover, focus, active, cambios de clase vía JS
+        
+        EJERCICIO: Cambia a 2s para ver una animación muy lenta
+        EJERCICIO 2: Prueba transition: all 0.3s;
+    */
+}
+
+nav a:hover {
+    /* 
+        PSEUDO-CLASE :hover
+        Aplica estilos cuando el cursor está SOBRE el elemento
+        
+        PSEUDO-CLASES COMUNES:
+        :hover - cursor encima
+        :active - mientras se hace clic
+        :focus - elemento enfocado (tab, clic en input)
+        :visited - enlace ya visitado
+        :first-child - primer hijo
+        :last-child - último hijo
+        :nth-child(n) - enésimo hijo
+        :not(selector) - negación
+        :disabled - elementos deshabilitados
+        :checked - checkboxes/radios marcados
+        
+        SINTAXIS: selector:pseudo-clase { ... }
+        
+        INTERACTIVIDAD: hover es fundamental para indicar elementos clicables
+    */
+    
+    opacity: 0.8;
+    /* 
+        opacity: Transparencia del elemento
+        
+        VALORES:
+        - 0: Completamente transparente (invisible)
+        - 0.5: Semi-transparente (50%)
+        - 1: Completamente opaco (100%, por defecto)
+        
+        EFECTO HOVER: Al pasar el mouse, el enlace se vuelve ligeramente transparente
+        Indica interactividad de forma sutil
+        
+        ALTERNATIVA:
+        color: rgba(255,255,255,0.8); (solo el texto)
+        background: rgba(0,0,0,0.5); (solo el fondo)
+        
+        DIFERENCIA:
+        opacity afecta TODO el elemento (incluido contenido hijo)
+        rgba solo afecta la propiedad específica
+        
+        EJERCICIO: Cambia a 0.3 para ver un efecto más dramático
+        EJERCICIO 2: Añade transform: scale(1.1); para efecto de zoom
+    */
+}
+
+/* ===========================================
+   3. CONTENIDO PRINCIPAL
+   =========================================== */
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    /* Centra el contenido y limita el ancho (mismo patrón que header-container) */
+}
+
+section {
+    padding: 4rem 0;
+    /* 
+        Espaciado vertical generoso entre secciones
+        4rem arriba y abajo = 64px
+        0 a los lados (el contenedor ya tiene padding lateral)
+        
+        RESPIRACIÓN: Espacios generosos mejoran legibilidad y estética
+        
+        EJERCICIO: Cambia a 1rem y observa cómo se comprime todo
+    */
+}
+
+h2 {
+    font-size: 2.5rem;
+    /* Títulos de sección grandes (40px) */
+    
+    margin-bottom: 2rem;
+    /* Espacio debajo del título antes del contenido */
+    
+    color: #667eea;
+    /* Color de marca (morado) para los títulos */
+    
+    text-align: center;
+    /* 
+        text-align: Alineación horizontal del texto
+        
+        VALORES:
+        - left: Alineado a la izquierda (default en idiomas LTR)
+        - right: Alineado a la derecha
+        - center: Centrado ← TÍTULOS PRINCIPALES
+        - justify: Justificado (alineado a ambos lados)
+        
+        HEREDABLE: Los hijos heredan el valor
+        
+        justify: EVITAR en web (puede crear espacios extraños)
+        Mejor para: documentos impresos
+        
+        EJERCICIO: Cambia a left y observa la diferencia
+    */
+}
+
+/* ===========================================
+   4. SECCIÓN HERO (BANNER PRINCIPAL)
+   =========================================== */
+
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Gradiente de marca (mismo que header) */
+    
+    color: white;
+    
+    text-align: center;
+    /* Todo el texto centrado */
+    
+    padding: 6rem 2rem;
+    /* 
+        Padding generoso:
+        - 6rem (96px) arriba y abajo: Crea un hero impactante y espacioso
+        - 2rem laterales: Respira en pantallas pequeñas
+    */
+    
+    margin: 0 -2rem;
+    /* 
+        MARGIN NEGATIVO: Técnica para "romper" el contenedor padre
+        
+        CONTEXTO:
+        main tiene padding: 0 2rem; (32px a los lados)
+        hero necesita llegar hasta los bordes de la pantalla
+        
+        SOLUCIÓN:
+        margin: 0 -2rem; cancela el padding del padre
+        -2rem izquierda + -2rem derecha = se expande 32px a cada lado
+        
+        RESULTADO: .hero llega hasta los bordes, ignorando el padding de main
+        
+        VISUALIZACIÓN:
+        ┌────────────────────────────────────┐
+        │ main (padding: 0 2rem)             │
+        │  ┌──────────────────────────────┐  │
+        │  │ section normal               │  │
+        │  └──────────────────────────────┘  │
+        ├────────────────────────────────────┤ ← margin negativo
+        │ .hero (se expande fuera del main) │
+        ├────────────────────────────────────┤
+        │  ┌──────────────────────────────┐  │
+        │  │ otra section                 │  │
+        │  └──────────────────────────────┘  │
+        └────────────────────────────────────┘
+        
+        USO COMÚN: Secciones de ancho completo dentro de contenedores limitados
+        
+        ALTERNATIVA: Sacar .hero fuera de <main> (menos flexible)
+        
+        EJERCICIO: Comenta esta línea y verás que .hero se queda dentro del contenedor
+    */
+}
+
+.hero h1 {
+    /* 
+        SELECTOR DESCENDIENTE: .hero h1
+        Solo afecta a <h1> dentro de .hero (no a otros h1)
+        Más específico que solo "h1"
+    */
+    
+    font-size: 3rem;
+    /* 
+        3rem = 48px
+        Título principal muy grande para impacto visual
+        
+        JERARQUÍA VISUAL:
+        h1 en hero: 3rem (48px) - El más grande
+        h2: 2.5rem (40px)
+        h3: 1.5rem (24px)
+        body: 1rem (16px)
+    */
+    
+    margin-bottom: 1rem;
+    /* Espacio entre título y subtítulo */
+}
+
+.hero p {
+    font-size: 1.3rem;
+    /* Subtítulo ligeramente mayor que texto normal (20.8px) */
+    
+    opacity: 0.9;
+    /* 
+        Ligeramente transparente (90% opaco)
+        EFECTO: Diferencia visual sutil entre título (100%) y subtítulo (90%)
+        Jerarquía visual sin cambiar el color
+    */
+}
+
+/* ===========================================
+   5. GRID DE SERVICIOS
+   =========================================== */
+
+.services-grid {
+    display: grid;
+    /* 
+        CSS Grid: Sistema de layout bidimensional (filas Y columnas)
+        MÁS POTENTE que Flexbox para layouts complejos
+        
+        CUÁNDO USAR GRID vs FLEXBOX:
+        Grid: Layouts 2D (filas y columnas simultáneas), alineación compleja
+        Flexbox: Layouts 1D (una fila O una columna), componentes pequeños
+        
+        CONCEPTOS GRID:
+        - Grid Container: elemento con display: grid
+        - Grid Items: hijos directos del container
+        - Grid Lines: líneas que forman la cuadrícula
+        - Grid Tracks: filas y columnas
+        - Grid Cells: intersección de fila y columna
+        - Grid Areas: agrupación de cells
+    */
+    
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* 
+        ¡LÍNEA MÁS IMPORTANTE PARA DISEÑO RESPONSIVE!
+        
+        DESGLOSE DETALLADO:
+        
+        1. grid-template-columns: Define las columnas de la cuadrícula
+        
+        2. repeat(): Función que repite un patrón
+           Sintaxis: repeat(cantidad, patrón)
+        
+        3. auto-fit: Palabra clave mágica
+           "Encaja tantas columnas como sea posible en el espacio disponible"
+           Colapsa columnas vacías
+           
+           ALTERNATIVA: auto-fill (mantiene columnas vacías)
+        
+        4. minmax(min, max): Función que define tamaño mínimo y máximo
+           minmax(280px, 1fr)
+           - min: 280px (ancho mínimo de cada tarjeta)
+           - max: 1fr (crece para llenar espacio disponible)
+        
+        5. fr: Unidad "fracción" del espacio disponible
+           1fr = 1 parte del espacio restante
+           Ejemplo: 2fr 1fr = primera columna el doble de ancha
+        
+        COMPORTAMIENTO RESPONSIVE AUTOMÁTICO:
+        
+        Pantalla ancha (1200px):
+        - Caben 4 columnas de 280px mínimo
+        - Se distribuyen equitativamente con 1fr
+        - Resultado: 4 tarjetas por fila
+        
+        Tablet (768px):
+        - Caben 2-3 columnas
+        - Se ajusta automáticamente
+        - Resultado: 2-3 tarjetas por fila
+        
+        Móvil (400px):
+        - Solo cabe 1 columna de 280px
+        - Resultado: 1 tarjeta por fila
+        
+        MAGIA: ¡No necesitas media queries!
+        El grid se adapta automáticamente al espacio disponible
+        
+        ALTERNATIVAS:
+        - grid-template-columns: 1fr 1fr 1fr; (3 columnas fijas)
+        - grid-template-columns: 300px 300px 300px; (no responsive)
+        - grid-template-columns: repeat(3, 1fr); (siempre 3 columnas)
+        
+        EJERCICIO: Cambia a repeat(auto-fit, minmax(400px, 1fr)) y observa
+        EJERCICIO 2: Prueba repeat(3, 1fr) y redimensiona la ventana
+    */
+    
+    gap: 2rem;
+    /* 
+        gap: Espacio entre grid items (filas y columnas)
+        2rem = 32px de separación
+        
+        EQUIVALENTE A:
+        row-gap: 2rem; (espacio vertical)
+        column-gap: 2rem; (espacio horizontal)
+        
+        VENTAJA: Una sola propiedad para ambos
+        
+        EJERCICIO: Cambia a gap: 4rem; para más espaciado
+        EJERCICIO 2: Prueba row-gap: 1rem; column-gap: 3rem; (diferente)
+    */
+    
+    margin-top: 2rem;
+    /* Espacio entre el h2 y el grid */
+}
+
+.service-card {
+    background: white;
+    /* Fondo blanco para las tarjetas */
+    
+    padding: 2rem;
+    /* Espacio interior generoso (32px) */
+    
+    border-radius: 10px;
+    /* 
+        border-radius: Redondea las esquinas
+        
+        VALORES:
+        - 0: Esquinas cuadradas (default)
+        - 10px: Redondeo suave
+        - 50%: Círculo perfecto (si width = height)
+        
+        SINTAXIS COMPLETA:
+        border-radius: top-left top-right bottom-right bottom-left;
+        
+        EJEMPLOS:
+        border-radius: 10px; (todas iguales)
+        border-radius: 10px 20px; (top-left/bottom-right, top-right/bottom-left)
+        border-radius: 10px 20px 30px 40px; (todas diferentes)
+        border-radius: 50%; (círculo si elemento es cuadrado)
+        
+        TENDENCIA: 5-15px para esquinas suaves modernas
+        
+        EJERCICIO: Cambia a 0px (cuadrado) o 50px (muy redondeado)
+    */
+    
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    /* 
+        Sombra sutil para elevar la tarjeta
+        - 0: Sin desplazamiento horizontal
+        - 4px: Desplazamiento hacia abajo
+        - 15px: Difuminado suave
+        - rgba(0,0,0,0.1): Negro al 10% (sombra tenue)
+    */
+    
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* 
+        Transiciones para MÚLTIPLES propiedades
+        transform y box-shadow se animan en 0.3s
+        
+        PREPARACIÓN: Estas propiedades cambiarán en :hover
+    */
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    /* 
+        transform: Aplica transformaciones 2D/3D sin afectar el flujo del documento
+        
+        FUNCIONES TRANSFORM:
+        
+        1. translate(): Mueve el elemento
+           translateX(10px): Mueve 10px a la derecha
+           translateY(-5px): Mueve 5px hacia arriba ← NUESTRO CASO
+           translate(10px, 20px): X e Y simultáneamente
+        
+        2. scale(): Cambia el tamaño
+           scale(1.1): Agranda 10%
+           scale(0.5): Reduce a la mitad
+           scaleX(2): Solo el ancho
+        
+        3. rotate(): Gira el elemento
+           rotate(45deg): Gira 45 grados
+           rotate(-90deg): Gira a la izquierda
+        
+        4. skew(): Inclina el elemento
+           skewX(20deg): Inclina horizontalmente
+        
+        MÚLTIPLES TRANSFORMS:
+        transform: translateY(-5px) scale(1.05) rotate(2deg);
+        
+        EFECTO HOVER: La tarjeta "levita" 5px al pasar el mouse
+        Combinado con la sombra aumentada, crea efecto 3D
+        
+        POR QUÉ transform EN VEZ DE margin/position:
+        - Más performante (usa GPU)
+        - No afecta otros elementos (no re-layout)
+        - Animaciones más suaves
+        
+        EJERCICIO: Cambia a scale(1.1) para efecto de zoom
+        EJERCICIO 2: rotate(5deg) para inclinación juguetona
+    */
+    
+    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    /* 
+        Sombra más pronunciada en hover
+        Cambios respecto al estado normal:
+        - 4px → 6px: Más desplazamiento (más "alta")
+        - 15px → 25px: Más difuminada (más suave)
+        - 0.1 → 0.15: Más oscura (más contraste)
+        
+        COMBINADO CON translateY:
+        - Tarjeta sube 5px
+        - Sombra crece y se oscurece
+        - EFECTO: La tarjeta "flota" sobre la página
+        
+        PRINCIPIO DE DISEÑO: Feedback visual al hover
+        Usuario sabe que puede interactuar
+    */
+}
+
+.service-card h3 {
+    color: #667eea;
+    /* Títulos en color de marca */
+    
+    margin-bottom: 1rem;
+    
+    font-size: 1.5rem;
+    /* 24px - Tamaño intermedio */
+}
+
+.service-card p {
+    color: #666;
+    /* 
+        Gris medio para el texto de cuerpo
+        #666 = rgb(102, 102, 102)
+        
+        CONTRASTE: No tan oscuro como los títulos (#333)
+        Crea jerarquía visual
+        
+        ACCESIBILIDAD: Ratio de contraste suficiente sobre fondo blanco
+        WCAG 2.1: Mínimo 4.5:1 para texto normal
+        #666 sobre #fff = ~5.74:1 ✓
+    */
+    
+    line-height: 1.8;
+    /* 
+        Espaciado entre líneas generoso (180%)
+        Más que el body (1.6) para mejorar legibilidad en bloques de texto
+        
+        REGLA: Líneas más largas necesitan mayor line-height
+    */
+}
+
+/* ===========================================
+   6. SECCIÓN "QUIÉNES SOMOS"
+   =========================================== */
+
+#quienes-somos {
+    /* 
+        SELECTOR DE ID: #id
+        Aplica SOLO al elemento con id="quienes-somos"
+        
+        ESPECIFICIDAD: ALTA (mayor que clases)
+        ID > Clase > Etiqueta
+        
+        CUÁNDO USAR ID vs CLASE:
+        ID: Único en la página, anclas de navegación, JavaScript
+        Clase: Reutilizable, estilos compartidos
+        
+        BUENA PRÁCTICA: Preferir clases para estilos
+        IDs para JavaScript y navegación
+    */
+    
+    background: #f8f9fa;
+    /* 
+        Gris muy claro (casi blanco)
+        #f8f9fa = rgb(248, 249, 250)
+        
+        PROPÓSITO: Diferenciar sección visualmente
+        PATRÓN COMÚN: Alternar fondos blancos y grises claros entre secciones
+        Crea separación visual sin bordes
+    */
+    
+    margin: 0 -2rem;
+    /* Técnica de margin negativo (igual que .hero) */
+    
+    padding: 4rem 2rem;
+    /* 
+        Compensa el margin negativo con padding
+        Resultado: ancho completo pero contenido con espaciado
+    */
+}
+
+.about-content {
+    max-width: 800px;
+    /* 
+        Más estrecho que el contenedor principal (1200px)
+        LEGIBILIDAD: Líneas de texto más cortas son más fáciles de leer
+        
+        LONGITUD ÓPTIMA DE LÍNEA:
+        45-75 caracteres (50-60 ideal)
+        800px ≈ 60-70 caracteres a 16px
+        
+        Demasiado ancho: ojos se cansan (difícil encontrar siguiente línea)
+        Demasiado estrecho: interrumpe el ritmo de lectura
+    */
+    
+    margin: 0 auto;
+    /* Centra horizontalmente */
+    
+    text-align: center;
+    /* Todo el texto centrado */
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    /* Ligeramente mayor que el texto normal (17.6px vs 16px) */
+    
+    line-height: 1.8;
+    /* Generoso para lectura cómoda */
+    
+    color: #555;
+    /* 
+        Gris medio-oscuro
+        Menos contraste que #333, pero más que #666
+        Apropiado para bloques de texto secundarios
+    */
+    
+    margin-bottom: 1.5rem;
+    /* Espacio entre párrafos (24px) */
+}
+
+/* ===========================================
+   7. FORMULARIO DE CONTACTO
+   =========================================== */
+
+.contact-form {
+    max-width: 600px;
+    /* Ancho moderado para formularios (ni muy ancho ni muy estrecho) */
+    
+    margin: 2rem auto;
+    /* 
+        Centra horizontalmente
+        2rem arriba y abajo = espacio respecto al h2
+    */
+    
+    background: white;
+    
+    padding: 2rem;
+    
+    border-radius: 10px;
+    
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    /* Tarjeta elevada para el formulario */
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    /* 
+        Espacio entre cada grupo de campo (label + input)
+        1.5rem = 24px
+        
+        PATRÓN: form-group agrupa label e input relacionados
+        Facilita estilizado y organización
+    */
+}
+
+.form-group label {
+    display: block;
+    /* 
+        display: block; hace que el label ocupe toda la línea
+        EFECTO: El input aparece debajo (no al lado)
+        
+        SIN ESTO: label e input estarían en la misma línea (inline)
+        
+        LAYOUT VERTICAL (recomendado para formularios):
+        ┌─────────────┐
+        │ Nombre      │ ← label (block)
+        ├─────────────┤
+        │ [________]  │ ← input (block por defecto)
+        └─────────────┘
+        
+        LAYOUT HORIZONTAL (menos común):
+        Nombre [________]
+        (ambos inline o inline-block)
+    */
+    
+    margin-bottom: 0.5rem;
+    /* Pequeño espacio entre label e input (8px) */
+    
+    color: #333;
+    
+    font-weight: 500;
+    /* Medium weight para destacar las etiquetas */
+}
+
+.form-group input,
+.form-group textarea {
+    /* 
+        SELECTOR MÚLTIPLE: input, textarea
+        Aplica los mismos estilos a ambos
+        Evita repetir código
+        
+        ALTERNATIVA:
+        .form-group input { ... }
+        .form-group textarea { ... }
+        (menos eficiente si son iguales)
+    */
+    
+    width: 100%;
+    /* 
+        Ocupa todo el ancho del contenedor (.form-group)
+        RESPONSIVE: Se ajusta automáticamente
+    */
+    
+    padding: 0.8rem;
+    /* 
+        Espacio interior generoso
+        12.8px hace los inputs cómodos de usar
+        Especialmente en móviles (áreas táctiles más grandes)
+        
+        ACCESIBILIDAD: Mínimo 44x44px para elementos táctiles (recomendación de Apple)
+    */
+    
+    border: 2px solid #e0e0e0;
+    /* 
+        border: grosor estilo color
+        
+        GROSOR: 2px (borde visible pero no grueso)
+        ESTILO: solid (línea continua)
+          Alternativas: dashed, dotted, double, groove, ridge, inset, outset
+        COLOR: Gris claro (#e0e0e0)
+        
+        SINTAXIS COMPLETA:
+        border-width: 2px;
+        border-style: solid;
+        border-color: #e0e0e0;
+        
+        LADOS INDIVIDUALES:
+        border-top: 2px solid red;
+        border-right: 1px dashed blue;
+        border-bottom: 3px dotted green;
+        border-left: 4px double orange;
+        
+        EJERCICIO: Cambia a border: 5px dashed red; y observa
+    */
+    
+    border-radius: 5px;
+    /* Esquinas ligeramente redondeadas (más sutil que las tarjetas) */
+    
+    font-size: 1rem;
+    /* 
+        Tamaño de texto igual al body
+        IMPORTANTE EN MÓVILES: < 16px causa zoom automático en iOS
+        Siempre usar mínimo 16px (1rem) para evitar zoom no deseado
+    */
+    
+    transition: border-color 0.3s;
+    /* 
+        Anima el color del borde cuando cambia
+        PREPARACIÓN: El borde cambia de color en :focus
+    */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    /* 
+        PSEUDO-CLASE :focus
+        Se activa cuando el usuario hace clic en el input o usa Tab para navegarlo
+        
+        ACCESIBILIDAD: Crucial para navegación por teclado
+        Usuario debe saber qué campo está activo
+    */
+    
+    outline: none;
+    /* 
+        outline: Borde especial de enfoque (por defecto, azul en Chrome)
+        none: Quita el outline por defecto
+        
+        ⚠️ ADVERTENCIA: NUNCA quites outline sin reemplazarlo
+        Los usuarios de teclado NECESITAN indicador de foco
+        
+        SOLUCIÓN: Reemplazar con otro indicador visual (como border-color)
+        
+        DIFERENCIA outline vs border:
+        - outline: NO afecta el layout (no suma al tamaño)
+        - border: Suma al tamaño del elemento
+        - outline: Dibujado fuera del border
+        - outline: No puede tener border-radius (siempre rectangular)
+        
+        ALTERNATIVA ACCESIBLE:
+        outline: 3px solid #667eea;
+        outline-offset: 2px;
+    */
+    
+    border-color: #667eea;
+    /* 
+        Cambia el color del borde al color de marca
+        EFECTO: Al hacer clic en el input, el borde cambia de gris a morado
+        FEEDBACK VISUAL: Usuario sabe que el campo está activo
+        
+        Transición suave gracias a: transition: border-color 0.3s;
+    */
+}
+
+.form-group textarea {
+    resize: vertical;
+    /* 
+        resize: Controla si el usuario puede redimensionar el textarea
+        
+        VALORES:
+        - none: No se puede redimensionar
+        - both: Horizontal y vertical (default en algunos navegadores)
+        - horizontal: Solo ancho
+        - vertical: Solo alto ← RECOMENDADO
+        
+        POR QUÉ vertical:
+        - Permite al usuario hacer el campo más alto si necesita más espacio
+        - Evita romper el layout horizontal
+        - Compromiso entre usabilidad y diseño
+        
+        ICONO: Aparece en la esquina inferior derecha (⋰)
+        
+        EJERCICIO: Cambia a none y el icono desaparece
+    */
+    
+    min-height: 120px;
+    /* 
+        min-height: Altura mínima
+        120px: Suficiente para ~6-7 líneas de texto
+        
+        DIFERENCIAS:
+        - height: Altura fija (textarea no crece/decrece)
+        - min-height: Altura mínima (puede crecer si hay más texto)
+        - max-height: Altura máxima (limita el crecimiento)
+        
+        PATRÓN COMÚN:
+        min-height: 120px; (tamaño inicial cómodo)
+        resize: vertical; (usuario puede agrandarlo)
+        max-height: 500px; (opcional, evita que crezca infinitamente)
+        
+        EJERCICIO: Cambia a 300px y observa el textarea más grande
+    */
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* Gradiente de marca para coherencia visual */
+    
+    color: white;
+    
+    padding: 1rem 3rem;
+    /* 
+        1rem arriba/abajo, 3rem izq/der
+        Botón horizontal más ancho que alto
+        Área táctil generosa para móviles
+    */
+    
+    border: none;
+    /* 
+        Quita el borde por defecto de los botones
+        Botones tienen un borde gris por defecto en navegadores
+    */
+    
+    border-radius: 5px;
+    
+    font-size: 1.1rem;
+    /* Texto ligeramente mayor (17.6px) para destacar */
+    
+    cursor: pointer;
+    /* 
+        cursor: Cambia el ícono del cursor
+        
+        VALORES COMUNES:
+        - default: Flecha normal (→)
+        - pointer: Mano con dedo (👆) ← Para elementos clicables
+        - text: Barra I (I) - Para texto seleccionable
+        - move: Cruz (✛) - Para elementos arrastrables
+        - not-allowed: Prohibido (🚫) - Para elementos deshabilitados
+        - wait: Reloj (⌚) - Operación en progreso
+        - help: Interrogación (?)
+        - grab: Mano abierta (✋) - Antes de arrastrar
+        - grabbing: Mano cerrada (✊) - Mientras arrastra
+        
+        pointer: Indica claramente que el botón es clicable
+        USABILIDAD: Fundamental para elementos interactivos
+        
+        CUSTOM:
+        cursor: url('cursor.png'), auto;
+        
+        EJERCICIO: Cambia a not-allowed y observa el símbolo de prohibido
+    */
+    
+    transition: transform 0.3s;
+    /* Anima la transformación en hover */
+    
+    width: 100%;
+    /* 
+        Botón ocupa todo el ancho del formulario
+        MÓVILES: Área táctil máxima
+        DESKTOP: Visualmente prominente
+    */
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    /* 
+        Sube 2px al pasar el mouse
+        EFECTO: Botón "salta" ligeramente
+        FEEDBACK: Indica que el botón es interactivo
+        
+        SUTIL: -2px es menos dramático que el -5px de las tarjetas
+        Apropiado para un elemento ya prominente
+    */
+}
+
+/* ===========================================
+   8. FOOTER (PIE DE PÁGINA)
+   =========================================== */
+
+footer {
+    background: #2c3e50;
+    /* 
+        Azul-gris oscuro
+        #2c3e50 = rgb(44, 62, 80)
+        
+        COLOR SCHEME: Paleta flat design (diseño plano)
+        Colores populares de Material Design y Flat UI
+    */
+    
+    color: white;
+    
+    padding: 3rem 0 1rem;
+    /* 
+        3rem arriba, 1rem abajo, 0 a los lados
+        Más padding arriba que abajo
+        ASIMETRÍA: Crea balance visual con el copyright separado
+    */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    /* Patrón de contenedor centrado (igual que main) */
+}
+
+.footer-info {
+    display: flex;
+    /* Flexbox para organizar las columnas del footer */
+    
+    justify-content: space-between;
+    /* 
+        Distribuye las columnas equitativamente
+        Primera columna a la izquierda, última a la derecha
+        Espacio automático entre columnas
+    */
+    
+    flex-wrap: wrap;
+    /* 
+        flex-wrap: Controla si los items pueden saltar a nueva línea
+        
+        VALORES:
+        - nowrap (default): Todos en una línea (pueden encogerse)
+        - wrap: Los items saltan a la siguiente línea si no caben
+        - wrap-reverse: Saltan pero en orden inverso
+        
+        RESPONSIVE: En pantallas pequeñas (móviles), las columnas se apilan verticalmente
+        Sin flex-wrap: las columnas se aplastarían en una línea
+        Con flex-wrap: saltan a nuevas líneas manteniendo su tamaño
+        
+        EFECTO:
+        Desktop:
+        [Contacto]  [Legal]  [Horario]
+        
+        Móvil:
+        [Contacto]
+        [Legal]
+        [Horario]
+    */
+    
+    gap: 2rem;
+    /* Espacio entre columnas (y entre filas si hay wrap) */
+    
+    margin-bottom: 2rem;
+    /* Espacio antes de la sección de copyright */
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+    
+    color: #667eea;
+    /* Títulos en color de marca para consistencia */
+}
+
+.footer-section p {
+    margin-bottom: 0.5rem;
+    /* Pequeño espacio entre líneas de información */
+}
+
+.footer-section a {
+    color: white;
+    
+    text-decoration: none;
+    
+    display: block;
+    /* 
+        Convierte enlaces inline en block
+        EFECTO: Cada enlace en su propia línea
+        ÁREA CLICABLE: Más grande (toda la línea)
+        
+        SIN block: Los enlaces estarían en la misma línea
+    */
+    
+    margin-bottom: 0.5rem;
+    /* Espacio entre enlaces */
+    
+    transition: color 0.3s;
+    /* Anima el cambio de color */
+}
+
+.footer-section a:hover {
+    color: #667eea;
+    /* Cambia a color de marca en hover */
+}
+
+.footer-bottom {
+    text-align: center;
+    
+    padding-top: 2rem;
+    /* Espacio arriba del copyright */
+    
+    border-top: 1px solid #34495e;
+    /* 
+        Línea separadora sutil
+        1px: Delgada
+        solid: Línea continua
+        #34495e: Ligeramente más claro que el fondo del footer
+        
+        EFECTO: Separa visualmente el copyright del resto del footer
+    */
+    
+    color: #95a5a6;
+    /* 
+        Gris claro
+        CONTRASTE: Menos prominente que el contenido principal del footer
+        Texto secundario (copyright) menos destacado
+    */
+}
+
+/* ===========================================
+   9. RESPONSIVE (MEDIA QUERIES)
+   =========================================== */
+
+@media (max-width: 768px) {
+    /* 
+        MEDIA QUERY: Reglas CSS que solo aplican bajo ciertas condiciones
+        
+        SINTAXIS:
+        @media (condición) {
+            // estilos que solo aplican si se cumple la condición
+        }
+        
+        TIPOS DE CONDICIONES:
+        
+        1. Ancho de pantalla:
+           max-width: aplica si el ancho es menor o igual
+           min-width: aplica si el ancho es mayor o igual
+           width: aplica si el ancho es exactamente ese valor
+        
+        2. Altura:
+           max-height, min-height, height
+        
+        3. Orientación:
+           orientation: portrait (vertical)
+           orientation: landscape (horizontal)
+        
+        4. Resolución:
+           min-resolution: 2dppx (pantallas retina)
+        
+        5. Tipo de dispositivo (obsoleto):
+           screen, print, speech
+        
+        BREAKPOINTS COMUNES:
+        - 320px: Móviles pequeños (iPhone SE)
+        - 480px: Móviles grandes
+        - 768px: Tablets ← NUESTRO CASO
+        - 1024px: Tablets grandes / laptops pequeñas
+        - 1200px: Desktops
+        - 1440px: Desktops grandes
+        
+        ESTRATEGIAS:
+        
+        1. Mobile First (recomendado):
+           Estilos base para móviles
+           @media (min-width: 768px) { // estilos tablet+ }
+        
+        2. Desktop First (usado aquí):
+           Estilos base para desktop
+           @media (max-width: 768px) { // estilos tablet- }
+        
+        POR QUÉ 768px:
+        - iPad (768x1024) en portrait
+        - Punto donde típicamente el diseño necesita cambiar
+        - Transición tablet ↔ móvil
+        
+        COMBINACIONES:
+        @media (min-width: 768px) and (max-width: 1024px) {
+            // Solo tablets
+        }
+        
+        @media (max-width: 768px) and (orientation: landscape) {
+            // Móviles en horizontal
+        }
+        
+        EJERCICIO: Cambia 768px por 1024px y observa cuándo se activa
+        HERRAMIENTA: DevTools (F12) → Toggle device toolbar (Ctrl+Shift+M)
+    */
+    
+    .header-container {
+        flex-direction: column;
+        /* 
+            Cambia la dirección del flex de horizontal (row) a vertical (column)
+            
+            EFECTO:
+            Desktop:
+            [Logo]                     [Menú]
+            
+            Móvil:
+            [Logo]
+            [Menú]
+            
+            POR QUÉ: En móviles no hay espacio para logo y menú lado a lado
+        */
+        
+        gap: 1rem;
+        /* Reduce el gap de 2rem a 1rem (menos espacio en vertical) */
+    }
+    
+    .logo, nav {
+        width: 100%;
+        /* 
+            Ambos ocupan el 100% del ancho
+            Sobrescribe:
+            - .logo { width: 20%; }
+            - nav { width: 80%; }
+            
+            ESPECIFICIDAD: Media query + misma especificidad = gana el último
+        */
+        
+        text-align: center;
+        /* Centra el logo y el menú */
+    }
+    
+    nav ul {
+        flex-direction: column;
+        /* 
+            Menú vertical en móviles
+            
+            Desktop:
+            [Inicio] [Servicios] [Quiénes Somos] [Contacto]
+            
+            Móvil:
+            [Inicio]
+            [Servicios]
+            [Quiénes Somos]
+            [Contacto]
+        */
+        
+        gap: 1rem;
+        /* Reduce el gap entre enlaces */
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+        /* 
+            Reduce de 3rem a 2rem
+            RAZÓN: Títulos muy grandes ocupan demasiado espacio en móviles
+            32px es más apropiado para pantallas pequeñas
+        */
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+        /* Reduce de 1.3rem a 1.1rem */
+    }
+    
+    h2 {
+        font-size: 2rem;
+        /* Reduce de 2.5rem a 2rem */
+    }
+    
+    .footer-info {
+        flex-direction: column;
+        /* 
+            Columnas del footer se apilan verticalmente
+            
+            Desktop:
+            [Contacto] [Legal] [Horario]
+            
+            Móvil:
+            [Contacto]
+            [Legal]
+            [Horario]
+            
+            NOTA: flex-wrap: wrap; ya permitía esto, pero flex-direction: column; lo fuerza
+        */
+    }
+}
+
+/* 
+   ============================================
+   RESUMEN DE CONCEPTOS CSS APRENDIDOS
+   ============================================
+   
+   1. BOX MODEL: margin, padding, border, content
+   2. SELECTORES: etiqueta, .clase, #id, descendiente, pseudo-clases
+   3. ESPECIFICIDAD: !important > inline > id > class > tag
+   4. UNIDADES: px, rem, em, %, vw/vh, fr
+   5. COLORES: hex, rgb, rgba, hsl, nombres
+   6. TIPOGRAFÍA: font-family, font-size, font-weight, line-height, letter-spacing
+   7. LAYOUT:
+      - display: block, inline, flex, grid
+      - Flexbox: justify-content, align-items, flex-direction, gap
+      - Grid: grid-template-columns, repeat, auto-fit, minmax, fr
+      - position: static, relative, absolute, fixed, sticky
+   8. EFECTOS VISUALES:
+      - background: colors, gradients, images
+      - border, border-radius
+      - box-shadow
+      - opacity
+      - transform: translate, scale, rotate
+   9. TRANSICIONES: transition para animaciones suaves
+   10. RESPONSIVE: @media queries, mobile-first vs desktop-first
+   
+   ============================================
+   EJERCICIOS RECOMENDADOS PARA PRACTICAR
+   ============================================
+   
+   NIVEL BÁSICO:
+   1. Cambia la paleta de colores (elige nuevos colores para gradientes y acentos)
+   2. Modifica tamaños de fuente y espaciados
+   3. Experimenta con diferentes border-radius
+   4. Prueba diferentes box-shadow
+   
+   NIVEL INTERMEDIO:
+   5. Añade un favicon (icono en la pestaña del navegador)
+   6. Crea una nueva sección con diseño diferente
+   7. Añade animaciones @keyframes (ej: fade in al cargar)
+   8. Implementa un menú hamburguesa funcional
+   9. Añade un botón "Volver arriba"
+   10. Crea un sistema de temas (claro/oscuro)
+   
+   NIVEL AVANZADO:
+   11. Implementa CSS Grid para el layout completo
+   12. Añade variables CSS (custom properties) para reutilizar valores
+   13. Usa Sass/SCSS para mejor organización
+   14. Optimiza para accesibilidad (contraste, foco visible, ARIA)
+   15. Implementa animaciones complejas al scroll (Intersection Observer)
+   16. Crea un carrusel de testimonios
+   17. Añade un lightbox para galería de imágenes
+   18. Implementa skeleton loading screens
+   
+   ============================================
+   RECURSOS PARA SEGUIR APRENDIENDO
+   ============================================
+   
+   DOCUMENTACIÓN:
+   - MDN Web Docs: https://developer.mozilla.org/es/
+   - CSS-Tricks: https://css-tricks.com/
+   - Can I Use: https://caniuse.com/ (compatibilidad de navegadores)
+   
+   HERRAMIENTAS:
+   - CSS Gradient Generator: https://cssgradient.io/
+   - Box Shadow Generator: https://box-shadow.dev/
+   - Coolors (paletas): https://coolors.co/
+   - Google Fonts: https://fonts.google.com/
+   
+   GUÍAS VISUALES:
+   - Flexbox Froggy: https://flexboxfroggy.com/ (juego para aprender Flexbox)
+   - Grid Garden: https://cssgridgarden.com/ (juego para aprender Grid)
+   - CSS Battle: https://cssbattle.dev/ (retos de CSS)
+   
+   FRAMEWORKS CSS (después de dominar CSS puro):
+   - Tailwind CSS: https://tailwindcss.com/
+   - Bootstrap: https://getbootstrap.com/
+   - Material-UI: https://mui.com/
+*/
